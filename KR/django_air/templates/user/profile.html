@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% block body %}
+    {% if profile %}
+        Имя: {{ profile.user.first_name }}
+        <br>
+        Фамилия: {{ profile.user.last_name }}
+        <br>
+        Логин: {{ profile.user.username }}
+        <br>
+        Почта: {{ profile.user.email }}
+        <br>
+        Ближайший аэропорт: {{ profile.location }}
+        <br>
+        <a href="{% url 'edit' username=request.user.username %}" class="btn btn-info">Изменить</a>
+        <a href="{% url 'logout' %}" class="btn btn-info">Выйти</a>
+    {% endif %}
+{% endblock %}

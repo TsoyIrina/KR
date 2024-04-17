@@ -1,0 +1,121 @@
+{% extends 'main/base.html' %}
+{% block body %}
+    {% for flight in tickets %}
+        {% if flight %}
+            {#        <div class="">#}
+            {#            <p>#}
+            {#                Взрослых: {{ flight.ad }}<br>#}
+            {#                Детей: {{ flight.ch }}<br>#}
+            {#                Младенцев: {{ flight.inf }}<br>#}
+
+            {#                Цена: {{ flight.price }}<br>#}
+            {#                Дата: {{ flight.date }}<br>#}
+            {#                пересадок: {{ flight.num_stops }}<br>#}
+            {#                {% for my_flight in flight.flights.all %}#}
+            {#                    <br>#}
+            {#                    авиакомпания: {{ my_flight.airline.code }} {{ my_flight.airline.name }}#}
+            {#                    <br>#}
+            {#                    {{ my_flight.from_airport.code}}->#}
+            {#                    {{ my_flight.to_airport.code }}#}
+            {#                {% endfor %}#}
+            {#            </p>#}
+            {#        {% if flight.paid == False %}#}
+            {#            <div class="btn-group" role="group" aria-label="Basic mixed styles example">#}
+            {#                <a type="button" class="btn btn-danger" href="{% url 'tick_del' flight.id %}">Удалить</a>#}
+            {#                <a type="button" class="btn btn-success" href="{% url 'payment' flight.id %}">Оплатить</a>#}
+            {#            </div>#}
+            {#        {% endif %}#}
+            {#            <hr>#}
+            {#        </div>#}
+            <div class="pt-3 pb-3">
+                <div class="card">
+                    <div class="card-header p-3 px-5">
+                        <div class="row">
+                            <div class="col">
+                                {% with first=flight.flights.all|first %}{{ first.from_airport.code }}
+                                    {{ first.from_airport.name }}{% endwith %}
+                                🛪
+                                {% for foo in flight.flights.all %}
+                                    {% if forloop.last %}
+                                        {{ foo.to_airport.code }}
+                                        {{ foo.to_airport.name }}
+                                    {% endif %}
+                                {% endfor %}
+                                {##}
+                                {#                            {% with last=flight.flights.all|last %}{{ last.to_airport.code }}#}
+                                {#                                {{ last.to_airport.name }}{% endwith %}#}
+                            </div>
+                            <div class="col-auto badge bg-primary fs-6">
+                                {{ flight.date }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-5 pt-4">
+                        <div class="row px-4">
+                            <div class="col-auto">
+                                Взрослых: {{ flight.ad }}
+                            </div>
+
+                            <div class="col text-center">
+                                Детей: {{ flight.ch }}
+                            </div>
+                            <div class=" col-auto ">
+                                Младенцев: {{ flight.inf }}
+                            </div>
+                        </div>
+                        <div class="accordion pt-4" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                        Перелетов: {{ flight.num_stops|add:1 }}
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        {% for my_flight in flight.flights.all %}
+                                            <div class="row px-4 pt-2">
+                                                <div class="col">
+                                                    {{ my_flight.from_airport.code }}
+                                                    -->
+                                                    {{ my_flight.to_airport.code }}
+                                                </div>
+                                                <div class="col-auto">
+                                                    Авиакомпания: {{ my_flight.airline.code }} {{ my_flight.airline.name }}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer px-5 py-3">
+                        <div class="row">
+                            <div class="col"><br>
+                            </div>
+                            <div class="col-auto">
+                                Цена: {{ flight.price }}
+                                {% if flight.paid == False %}
+                                    <a type="button" class="btn btn-danger"
+                                       href="{% url 'tick_del' flight.id %}">Удалить</a>
+                                    <a type="button" class="btn btn-success"
+                                       href="{% url 'payment' flight.id %}">Оплатить</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% empty %}
+        *звук сверчков*
+
+
+    {% endfor %}
+{% endblock %}

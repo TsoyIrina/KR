@@ -1,0 +1,8 @@
+{% extends 'main/base.html' %}
+{% block body %}
+    <form novalidate method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success" value="Оплатить">
+    </form>
+{% endblock %}

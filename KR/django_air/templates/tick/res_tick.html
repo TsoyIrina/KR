@@ -1,0 +1,97 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Где вас забрать?{% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+            integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+          integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script>
+        $(document).ready(function () {
+            $('#input_from').select2();
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    {#    <form method="GET">#}
+    <div class="container-fluid">
+        {% if flight %}
+            <div class="card">
+                <div class="card-header p-3 px-5">
+                    <div class="row">
+                        <div class="col">
+                            {% with first=flight.flights|first %}{{ first.from_airport.code }}
+                                {{ first.from_airport.name }}{% endwith %}
+                            🛪
+                            {% with last=flight.flights|last %}{{ last.to_airport.code }}
+                                {{ last.to_airport.name }}{% endwith %}
+                        </div>
+                        <div class="col-auto badge bg-primary fs-6">
+                            {{ date }}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-5 pt-4">
+                    <div class="row px-4">
+                        <div class="col-auto">
+                            Взрослых: {{ ad }}
+                        </div>
+
+                        <div class="col text-center">
+                            Детей: {{ ch }}
+                        </div>
+                        <div class=" col-auto ">
+                            Младенцев: {{ inf }}
+                        </div>
+                    </div>
+                    <div class="accordion pt-4" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Перелетов: {{ flight.num_stops|add:1 }}
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {% for my_flight in flight.flights %}
+                                        <div class="row px-4 pt-2">
+                                            <div class="col">
+                                                {{ my_flight.from_airport.code }}
+                                                -->
+                                                {{ my_flight.to_airport.code }}
+                                            </div>
+                                            <div class="col-auto">
+                                                Авиакомпания: {{ my_flight.airline.code }}  {{ my_flight.airline.name }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="card-footer px-5 py-3">
+                    <div class="row">
+                        <div class="col"><br>
+                        </div>
+                        <div class="col-auto">
+                            Цена: {{ price }}
+                            <a class="btn btn-primary ms-4" href="{% url 'main' confirm_ticket=1 %}">Выбрать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+
+
+{% endblock %}

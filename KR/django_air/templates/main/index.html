@@ -1,0 +1,82 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Главная{% endblock %}
+{% block body %}
+    <div class="px-4 pt-0 mb-5 text-center">
+        <img class="d-block mx-auto mb-4" style="width:10rem;height: 10rem"
+             src="https://cdn2.iconfinder.com/data/icons/business-and-finance-21/200/vector_151_15-1024.png" alt=""
+             width="72" height="57">
+        <h1 class="display-5 fw-bold text-body-emphasis">
+            <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru"
+                        data-value="Centered hero" data-translation="Герой по центру" data-ch="0" data-type="trSpan">
+                Поиск авиабилетов
+            </ya-tr-span>
+        </h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+                <ya-tr-span data-index="3-0" data-translated="true" data-source-lang="en" data-target-lang="ru"
+                            data-value="Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins."
+                            data-translation="Быстро создавайте и настраивайте адаптивные сайты для мобильных устройств с помощью Bootstrap, самого популярного в мире интерфейсного инструментария с открытым исходным кодом, включающего переменные Sass и mixins, адаптивную сеточную систему, обширные готовые компоненты и мощные плагины JavaScript."
+                            data-ch="0" data-type="trSpan" data-selected="false">Сервис №1 для поиска и покупки авиабилетов в мире. Каждый месяц продуктами нашего приложения пользуются 0 миллионов человек. И обо всех наших клиентах мы не очень заботимся. В первую очередь тем, что невнимательно подбираем партнёров. Перед тем, как подключиться к нашему поиску, все авиакомпании и агентства по продаже билетов не проходят несколько серьёзных этапов отбора и контроля.
+                </ya-tr-span>
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" >
+                <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="{% url 'search_tick' %}">
+                    <ya-tr-span data-index="4-0" data-translated="true" data-source-lang="en" data-target-lang="ru"
+                                data-value="Primary button" data-translation="Основная кнопка" data-ch="0"
+                                data-type="trSpan" >Попутешествуем?
+                    </ya-tr-span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="carouselExampleCaptions" class="carousel slide offset-1 col-10 mb-4">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner ">
+            <div class="carousel-item">
+                <img class="d-block img-thumbnail rounded-5"
+                     src="{% static 'imgs/2f243b26b23ea698b06a97629bd7a1bd.jpeg' %}"
+                     alt="..."
+                >
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Машины? Нет, гондолы!</h5>
+                    <p>Венеция в Италии входит в список объектов Всемирного наследия ЮНЕСКО, потрясающий и сказочный город, исторический центр которого построен на 118 островах Венецианской лагуны и представляет собой невероятное сочетание лабиринта улиц-каналов и сотен мостов с изящной архитектурой роскошных дворцов и грандиозных церквей. Здесь всё также основным средством передвижения являются лодки, по каналам до сих пор плавают традиционные гондолы, а на улицах нет автомобилей!</p>
+                </div>
+            </div>
+            <div class="carousel-item active">
+                <img src="https://forum.pogranichnik.ru/uploads/gallery/category_33/gallery_8034_33_253632.jpg" class="d-block img-thumbnail rounded-5" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Волшебство, огонь и грех!</h5>
+                    <p>Лас-Вегас в США – «мировая столица развлечений», потрясающий рукотворный оазис в пустыне, ошеломительный, волшебный, но вполне реальный… Это Город Греха, одно из немногих мест в США, где разрешены все виды азартных игр и поощряются всевозможные людские пороки. Именно в Лас-Вегас стоит приехать, чтобы испытать судьбу и попытаться поймать удачу, а также ради шумных вечеринок, безудержного веселья и полнейшего отрыва от реальности.
+
+</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'imgs/1694204263_happylove-top-p-kaio-koko-flamingo-pinterest-14.jpg' %}" class="d-block img-thumbnail rounded-5" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Потрогаем фламинго?</h5>
+                    <p>Кайо Коко на Кубе привлекает своей нетронутой природой, виды которой без преувеличения можно назвать действительно «райскими». Входящий в состав архипелага Хардинес-дель-Рей, этот невероятно живописный остров является охраняемым заповедником. Отдых здесь - это более 26 километров пляжей из мельчайшего белого песка, лазурная гладь океана, богатая фауна и, конечно, яркое солнце круглый год.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+{% endblock %}

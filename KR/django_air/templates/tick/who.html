@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Кто едет?{% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+            integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+          integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script>
+        $(document).ready(function () {
+            $('#input_from').select2();
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    <form method="GET">
+        <div class="ms-5 me-5 ps-5 pe-5">
+            <div class="input-group mt-4">
+                <span class="input-group-text col-3" id="basic-addon1">Когда</span>
+                <input type="date" class="form-control" name="input_date">
+            </div>
+            <div class="text-danger offset-3 mt-0 pt-0">{{ date_error }}</div>
+            <div class="input-group mt-3">
+                <span class="input-group-text col-3" id="basic-addon1">Взрослые от 12 лет</span>
+                <input type="number" class="form-control" name="adult_count" value="1">
+            </div>
+            <div class="text-danger offset-3 mt-0 pt-0">{{ person_error }}</div>
+            <div class="input-group mt-3">
+                <span class="input-group-text col-3" id="basic-addon1">Дети от 3 лет до 12 лет</span>
+                <input type="number" class="form-control" name="child_count" value="0">
+            </div>
+            <div class="input-group mt-3">
+                <span class="input-group-text col-3" id="basic-addon1">Младенцы до 3 лет</span>
+                <input type="number" class="form-control" name="infant_count" value="0">
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Найти" class="btn btn-primary col-3 mt-4">
+            </div>
+        </div>
+    </form>
+{% endblock %}

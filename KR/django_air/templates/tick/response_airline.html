@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Где вас забрать?{% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+            integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+          integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script>
+        $(document).ready(function () {
+            $('#input_from').select2();
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    <form method="GET">
+        <div class="">
+            {% if flights %}
+                {% for flight in flights %}
+                    <div class="container-fluid">
+                    <div class="text-center btn btn-outline-primary rounded-5 border-3 col-12">
+                        <button formaction="{% url 'who' tick_from_slug=from tick_to_slug=to id=forloop.counter0 %}"
+                                type="submit" class="list-group-item list-group-item-action">
+                        Количество пересадок: {{ flight.num_stops }}<br><br>
+                            {% for my_flight in flight.flights %}
+                                <br>
+                                {{ my_flight.from_airport.code }}  {{ my_flight.from_airport.name }}->
+                                {{ my_flight.to_airport.code }}  {{ my_flight.to_airport.name }}
+                                <br>
+                                Авиакомпания: {{ my_flight.airline.name }}
+                                <br>
+                            {% endfor %}
+                            <br><br>
+                            Стоимость билета: {{ flight.total_price }}<br><br>
+
+
+                        </button>
+                    </div>
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

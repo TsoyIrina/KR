@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% block title %}Поиск билетов{% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+            integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+          integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script>
+        $(document).ready(function () {
+            $('#input_from').select2();
+        });
+        $(document).ready(function () {
+            $('#input_to').select2();
+        });
+    </script>
+{% endblock %}
+{% block body %}
+
+    <form method="GET">
+        <div class="container justify-content-center text-center w-75 mt-5 pt-5">
+        <div class="container-fluid ">
+            <div class="row col-auto">
+                <img style="width:3.3rem;height: 2rem"
+                     src="https://cdn-icons-png.flaticon.com/512/3285/3285604.png">
+
+                <div class="input-group mb-3 col">
+                    <select class="form-select" id="input_from" name='input_from'>
+                        {% if air_list %}
+                            {% for air_code, air in air_list %}
+                                <option value={{ air_code }}>{{ air_code }} {{ air }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mt-5">
+            <div class="row ">
+                <img style="width:3.3rem;height: 2.1rem" class="col-auto"
+                     src="https://cdn-icons-png.flaticon.com/512/3285/3285374.png">
+
+                <div class="input-group mb-3 col ">
+
+                    <select class="form-select py-3" id="input_to" name="input_to">
+                        {% if air_list %}
+                            {% for air_code, air in air_list %}
+                                <option value={{ air_code }}>{{ air_code }} {{ air }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+        </div>
+            <br>
+            <input type="submit" value="Найти" class=" btn btn-primary">
+        </div>
+
+    </form>
+{% endblock %}
